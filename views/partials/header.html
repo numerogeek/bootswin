@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{page:title}} - {{ settings:site_name }}.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="author" content="Geoffrey Monté">
+    <base href="{{ url:base }}"/>
+    <!-- Le styles -->
+
+    {{ theme:css file="bootstrap.css" }}
+    {{ theme:css file="bootstrap-responsive.css" }}
+    {{ theme:css file="custom.css" }}
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    {{ integration:analytics }}
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons 
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"> </span>
+            <span class="icon-bar"> </span>
+            <span class="icon-bar"> </span>
+          </a>
+          <a class="brand" href="{{ url:base }}">{{ settings:site_name }}</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+            	{{ navigation:links group="header" class="active" }}
+  					   <li class='{{ class }}'><a href="{{ url }}">{{ title }}</a></li>
+            	{{ /navigation:links }}
+            </ul>
+            {{ if user:logged_in }}
+             <ul class=" nav pull-right">
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user:first_name }} {{ user:last_name }} <b class="caret"> </b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ url:site }}/users/logout">{{ helper:lang line="logout_label" }}</a></li>
+                    {{ if settings:enable_profiles }}
+                    <li><a href="{{url:site}}admin" target="_blank">{{ helper:lang line="edit_profile_label" }}</a></li>
+                   {{ endif }}
+                    <li><a href="{{url:site}}/edit-settings" target="_blank">{{ helper:lang line="settings_label" }}</a></li>
+                  </ul>
+                </li>
+              </ul>
+            {{ else }}
+            <form action="{{ url:site uri='users/login' }}" method="post" accept-charset="utf-8" class="navbar-form pull-right">
+              <input class="span2" type="text" id="email" name="email" maxlength="120" placeholder="Email">
+              <input class="span2" type="password" id="password" name="password" maxlength="20" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form>
+            {{ endif }}
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+{{ session:messages success="alert alert-success" notice="alert alert-info" error="alert alert-error" }}
+{{ if { url:segments segment="1" } != '' }}
+	{{ theme:partial name="breadcrumbs" }}
+{{ endif }}

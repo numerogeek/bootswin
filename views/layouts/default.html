@@ -1,0 +1,20 @@
+{{ theme:partial name="header" }}
+
+<!-- content -->
+<div class="row-fluid">{{ template:body }}</div>
+
+<!-- /content -->
+{{ theme:partial name="common_modal" }}
+
+{{ if user:logged_in }}
+
+{{ theme:partial name="logged_modal" }}
+
+{{endif}}
+
+{{if page:slug=="home"}}
+
+<div class="row-fluid">{{theme:partial name="carousel"}}</div>
+{{endif}}
+
+<div class="row-fluid">{{ theme:partial name="footer" }}</div>

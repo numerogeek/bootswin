@@ -1,0 +1,13 @@
+{{ if template:has_breadcrumbs }}
+	{{ if theme:options:show_breadcrumbs == 'yes' }}
+	<ul class="breadcrumb">
+	{{ template:breadcrumbs }}
+	{{ if uri }}
+	<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ uri }}" itemprop="url"> <span itemprop="title"> {{ name }} </span> </a><span class="divider">/</span></li>
+	{{ else }}
+	<li class="active">{{ name }}</li>
+	{{ endif }}
+	{{ /template:breadcrumbs }}
+	</ul>
+	{{ endif }}
+{{ endif }}

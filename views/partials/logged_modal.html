@@ -1,0 +1,23 @@
+<div id="modalAddRestaurant" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">{{ theme:lang lang="menuparfait" line="home:modal:title:add_restaurant" }}</h3>
+  </div>
+  <div class="modal-body">	    
+
+  	{{ streams:form stream="restaurant" namespace='restaurant' mode="new"  form_key="addRestaurant" return="/restaurant/view/-id-" success_message={ theme:lang lang="menuparfait" line ="restaurant:creation:success" } }}
+
+	{{ form_open }}
+
+	{{ fields }}
+		<label for='{{ input_slug }}'>{{theme:lang lang="menuparfait" line=input_title}}</label>
+		{{ input }}
+	{{ /fields }}
+	    <button type='submit' class="btn-block btn-primary" >{{ theme:lang lang="menuparfait" line="home:submit" }}</button>
+    {{ form_close }}
+  {{ /streams:form }}
+  </div>
+  <div class="modal-footer">
+
+  </div>
+</div>
